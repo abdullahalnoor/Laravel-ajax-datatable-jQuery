@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use  App\Http\Controllers\CategoryController;
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route:: resource('/category', CategoryController::class);
+Route::post('/category/data', [CategoryController::class,'getData']);
