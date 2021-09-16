@@ -13,7 +13,6 @@
 
     {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.css"/> --}}
 
-<meta name="csrf-token" content="{{ csrf_token() }}">
 
 
 
@@ -31,19 +30,6 @@
     Laravel Datatable Server Side Render & Custome Searc
 </a>
 
-<div class="container">
-    <div class="row">
-        <div class="post-search-panel">
-    <input type="text" id="searchInput" placeholder="Type keywords..." />
-    <select id="sortBy">
-        <option value="">Sort by</option>
-        <option value="1">Active</option>
-        <option value="2">Inactive</option>
-    </select>
-</div>
-    </div>
-</div>
-
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">
@@ -52,7 +38,6 @@
                         <th>+</th>
                         <th>Id</th>
                         <th>Title</th>
-                        <th>Status</th>
 
                        
                         <th>Options</th>
@@ -93,12 +78,6 @@ var source_data  = $('.common_table').data('source');
 
    $(document).ready(function () {
 
-       $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
 
 function format ( d ) {
     // `d` is the original data object for the row
@@ -120,7 +99,7 @@ function format ( d ) {
 
       var table =  $('.common_table').DataTable({
 
-            "searching": false,
+            
             "processing": true,
             
             "serverSide": true,
@@ -128,12 +107,7 @@ function format ( d ) {
                      "url": source_data,
                      "dataType": "json",
                      "type": "POST",
-                     "data": function ( d ) {
-                        return $.extend( {}, d, {
-                        "search_keywords": $("#searchInput").val().toLowerCase(),
-                        "filter_option": $("#sortBy").val().toLowerCase()
-                        } );
-                    }
+                     "data":{ _token: "{{csrf_token()}}"},
                      
                    },
             "columns": [
@@ -143,30 +117,22 @@ function format ( d ) {
                 "data": null,
                 "defaultContent": ''
                 },
-                { "data": "sl" },
+                { "data": "id" },
                 { "data": "name" },
-                { "data": "status" },
                 { "data": "options" }
             ],
             "order": [[ 1, "asc" ]]	,
-        //    "stateSave": true,
+           "stateSave": true,
 
         });
 
 
 
 
-    
 
 
-$(document).ready(function() {
-     table.draw();
-    
-    // Redraw the table based on the custom input
-    $('#searchInput,#sortBy').bind("input", function(){
-        table.draw();
-    });
-} );
+
+
 
 
 
