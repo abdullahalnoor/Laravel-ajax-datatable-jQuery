@@ -24,11 +24,12 @@ class CategoryController extends Controller
     //   return  $request->all();
 
         $columns = array(
-            0 => 'sl',
-            1 => 'name',
-            2 => 'created_at',
-            3 => 'status',
-            4 => 'id',
+            // 0 => 'toggle',
+            // 1 => 'sl',
+            2 => 'name',
+            3 => 'created_at',
+            // 4 => 'status',
+            // 5 => 'id',
         );
 
         $totalData = Category::count();
@@ -75,6 +76,7 @@ class CategoryController extends Controller
                 $show =  route('category.show', $post->id);
                 $edit =  route('category.edit', $post->id);
 
+            
                 $nestedData['sl'] = $i;
                 $nestedData['name'] = $post->name;
                 $nestedData['status'] = $post->status === 1 ? 'Active' : 'Inactive';
