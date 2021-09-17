@@ -49,10 +49,11 @@
             <div class="col-md-12">
                 <table class="table table-bordered common_table" data-source="{{url('/category/data')}}">
                     <thead>
-                        <th>+</th>
-                        <th>Id</th>
-                        <th>Title</th>
+                        {{-- <th>+</th> --}}
+                        <th>Sl</th>
+                        <th>Name</th>
                         <th>Status</th>
+                        <th>Time</th>
 
                        
                         <th>Options</th>
@@ -137,17 +138,20 @@ function format ( d ) {
                      
                    },
             "columns": [
-               {
-                "className": 'dt-control',
-                "orderable": false,
-                "data": null,
-                "defaultContent": ''
-                },
-                { "data": "sl" },
-                { "data": "name" },
-                { "data": "status" },
-                { "data": "options" }
+            //    {
+            //     "className": 'dt-control',
+            //     "orderable": false,
+            //     "data": null,
+            //     "defaultContent": ''
+            //     },
+                { "data": "sl", "searchable": false,"orderable":false},
+                { "data": "name"  },
+                { "data": "created_at" },
+                { "data": "status","orderable":false },
+        
+                { "data": "options","searchable": false,"orderable":false }
             ],
+          
             "order": [[ 1, "asc" ]]	,
         //    "stateSave": true,
 

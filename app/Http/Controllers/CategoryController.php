@@ -21,12 +21,13 @@ class CategoryController extends Controller
 
     public function getData(Request $request){
 
-
+    //   return  $request->all();
 
         $columns = array(
             0 => 'sl',
             1 => 'name',
-            3 => 'created_at',
+            2 => 'created_at',
+            3 => 'status',
             4 => 'id',
         );
 
@@ -77,9 +78,9 @@ class CategoryController extends Controller
                 $nestedData['sl'] = $i;
                 $nestedData['name'] = $post->name;
                 $nestedData['status'] = $post->status === 1 ? 'Active' : 'Inactive';
-                $nestedData['created_at'] = date('j M Y h:i a', strtotime($post->created_at));
-                $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' ><span class='glyphicon glyphicon-list'></span></a>
-                                          &emsp;<a href='{$edit}' title='EDIT' ><span class='glyphicon glyphicon-edit'></span></a>";
+                $nestedData['created_at'] = date('j M Y ', strtotime($post->created_at));
+                $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' >View</a>
+                                          &emsp;<a href='{$edit}' title='EDIT' >Edit</a>";
                 $data[] = $nestedData;
                 $i++;
             }
